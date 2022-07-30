@@ -1,0 +1,6 @@
+#gall_gam{margin-top:30px;display:flex;flex-wrap:wrap;}
+.gal_pic{height:130px;margin:3px;}
+.gal_pic img{height:100%;border-radius:6px;}
+.nnact{display:none;}
+.gal_bl{height:130px;width:233px;background-color:#454545;margin:3px;border-radius:6px;cursor:pointer;}
+.gal_bl div{margin:55px 20px;font-size:14px;text-align:center;font-weight:600;color:#fff;text-shadow:0 0 2px #000;}
