@@ -11,11 +11,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	q_arbl = 'arr'; //class arrows
 	qq_left = '_lefs'; //left arrow
 	qq_right = '_rifs'; //right arrow
+	gg_tmch = '#tm_chisl'; //счетчик
+	img_act = '_activ';
+	qq_clos = '#gl_clos'; //closed gallery
 	gg_cols = 4; //кол-во столбцов (равно кол-ву изображений)
 	qq_urlt = 'imgs/'; //адрес до папки с изображениями
 	gg_mass = galpics; //массив изображений
-	glt = '';
-	g_form = '<div id="'+gform+'"><div id="g_pod"><div id="ug_gg"><div class="arr _lefs"></div><div><img id="'+gbimg+'" src="" prop=""></div><div class="arr _rifs"></div></div><div id="'+gbcont+'"></div></div></div>';
+	glt = ''; //dont change this value
+	g_form = '<div id="'+gform+'"><div id="g_pod"><div id="gl_clos"></div><div id="ug_gg"><div class="arr _lefs"></div><div><div id="img_sch"><div id="tm_chisl">0 / 0</div></div><img id="'+gbimg+'" src="" prop=""></div><div class="arr _rifs"></div></div><div id="'+gbcont+'"></div></div></div>';
 	
 	
 	ggalc = document.querySelector(def_gcont);//контейнер галлереи
@@ -29,6 +32,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	g_imgs = document.querySelectorAll('.'+gimgs);//массив всех изображений галлереи
 	g_dpb = document.querySelector('.'+gbldp);//доп. кнопка галлереи
 	g_arrw = document.querySelectorAll('.'+q_arbl);//массив всех стрелок биг img
+	g_stmch = document.querySelector(gg_tmch);
+	g_glcls = document.querySelector(qq_clos);
 
 	
 	if(ggall){
@@ -36,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		Array.from(g_imgs, el => el.addEventListener('mouseleave', e => {_leapicchange(e);}));
 		Array.from(g_imgs, el => el.addEventListener('click', e => {_startgalvis(e);}));
 		Array.from(g_arrw, el => el.addEventListener('click', e => {_datachange(e);})); //листаем по стрелкам в сторону изображения
+		g_glcls.addEventListener('click', e => {_galclosed(e);});
 	}
 	if(g_dpb){
 		g_dpb.addEventListener('click', e => {_startgalvis(e);});
@@ -44,15 +50,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	//set default parametrs и построение галереи
 	function ggall_prop(){
 		tmp_mass = gg_mass.length;//кол-во изображений по факту
-		if(tmp_mass>gg_cols){ // 6>4
-			tmp_metka = tmp_mass; // 6
+		if(tmp_mass>gg_cols){
+			tmp_metka = tmp_mass; 
 			for(i=1; i<=(gg_cols); i++){ //вывод видимых изобрадений на страницу
 				ggall.insertAdjacentHTML("beforeend","<div class='"+gimgs+"'><img data-img='"+i+"' src='"+qq_urlt+gg_mass[i-1]+"'></div>"); 
 			}
 			for(j=gg_cols; j<(tmp_mass); j++){//вывод невидимых изобрадений на страницу
 				ggall.insertAdjacentHTML("beforeend","<div class='"+gimgs+" nnact'><img data-img='"+(j+1)+"' src='"+qq_urlt+gg_mass[j]+"'></div>"); 
 			}
-			if(tmp_metka > gg_cols){ //6 > 4
+			if(tmp_metka > gg_cols){
 				tt_but = document.querySelector("img[data-img='"+gg_cols+"']").parentElement;
 				tt_but.classList.add('nnact');
 				ggall.insertAdjacentHTML("beforeend","<button class='"+gbldp+"'>+ Больше</button>"); 
@@ -60,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				ggall.insertAdjacentHTML("beforeend","<button class='"+gbldp+"'>+ Больше</button>"); 
 			}
 		}else{
-			tmp_metka = tmp_mass; // 3
+			tmp_metka = tmp_mass; 
 			for(i=1; i<=(tmp_metka); i++){
 				ggall.insertAdjacentHTML("beforeend","<div class='"+gimgs+"'><img data-img='"+i+"' src='"+qq_urlt+gg_mass[i-1]+"'></div>"); 
 			}
@@ -68,37 +74,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 	
 	function _hovpicchange(e){// действия при наведении на каждое из изображений
-		pict = e.target; //.getAttribute('data-img')
+		pict = e.target;
 		pict.style.transform = 'Scale(1.2)';
 	}
 	function _leapicchange(e){// действия при наведении на каждое из изображений
-		pict = e.target; //.getAttribute('data-img')
+		pict = e.target;
 		pict.style.transform = null;
 	}
 	function _startgalvis(e){// при клике на каждое из изображений запускается галлерея
 		pict = e.target; //передаем что за объект запустил галерею
 		bzh = pict.getAttribute('class');
-		if(bzh){// кнопка ?
-			pfg = gg_cols; //4
+		if(bzh){
+			pfg = gg_cols; 
 		}else{
-			pfg = pict.getAttribute('data-img'); //2
+			pfg = pict.getAttribute('data-img');
 		}
 		gp_img = qq_urlt+gg_mass[pfg-1];
 		gbip.setAttribute('src', gp_img);
 		gbip.setAttribute('prop', pfg);
 		//цикл подложки
-		// parentElement.classList.add('_activ');
 		for(k=1; k<=(tmp_mass); k++){
 			gcontp.insertAdjacentHTML("beforeend","<div class='"+gimgt+"'><img data-img='"+k+"' src='"+qq_urlt+gg_mass[k-1]+"'></div>"); 
 		if(pfg == k){
 			var e = pfg;
-			glt = pfg;
-			console.log(glt);
 			_chanramp(e)
-			/*tg_act = document.querySelector("img[data-img='"+pfg+"']");
-			tg_act.classList.add('_activ');*/
 		}
-		
 		}
 		gpifo.style.display = 'block';
 		qb_impr = gcontp.querySelectorAll('img'); //массив всех минипревью на биг форме
@@ -116,6 +116,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				lz_img = qq_urlt+gg_mass[lz-1];
 				gbip.setAttribute('src', lz_img);
 				gbip.setAttribute('prop', lz);
+				ghh = gcontp.querySelector("img[data-img='"+glt+"']");
+				ghh.classList.remove(img_act);
+				e = lz;
+				_chanramp(e);
 			}
 			}
 		}else{
@@ -128,6 +132,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					lz_img = qq_urlt+gg_mass[lz - 1];
 					gbip.setAttribute('src', lz_img);
 					gbip.setAttribute('prop', lz);
+					ghh = gcontp.querySelector("img[data-img='"+glt+"']");
+					ghh.classList.remove(img_act);
+					e = lz; 
+					_chanramp(e);
 				}
 			}
 		}
@@ -135,23 +143,24 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	function _imgchange(e){
 		bb_im = e.target; //что за изображение превью?
 		lz = bb_im.getAttribute('data-img'); //что за изображение превью?
+		ghh = gcontp.querySelector("img[data-img='"+glt+"']");
+		ghh.classList.remove(img_act);
 		if(lz>0 && lz<=tmp_mass){
 			lz_img = qq_urlt+gg_mass[lz - 1];
 			gbip.setAttribute('src', lz_img);
 			gbip.setAttribute('prop', lz);
 			var e = lz;
-			console.log(e);
 			_chanramp(e);
 		}
 	}
 	function _chanramp(e){
-		//_activ
-		ton = e;
-		//glt;
-		console.log(glt);
-		ghh = gcontp.querySelector("img[data-img='"+glt+"']");
-		ghh.classList.remove('_activ');
-		tg_act = gcontp.querySelector("img[data-img='"+ton+"']");
-		tg_act.classList.add('_activ');
+		glt = e;
+		g_stmch.innerHTML = glt + ' / ' + tmp_mass;
+		tg_act = gcontp.querySelector("img[data-img='"+glt+"']");
+		tg_act.classList.add(img_act);
+	}
+	function _galclosed(e){
+		gpifo.style.display = null;
+		gcontp.innerHTML = '';
 	}
 });
