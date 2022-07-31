@@ -1,39 +1,38 @@
-# Bg-horizon-scrolling
-This is horizontal scrolling for a website in pure javascript, without using third-party plugins. In this project, there is a change not of images, but of the background.
-Scrolling is done automatically and supports manual change, using the side arrows or controllers at the bottom.
+# Image Gallery
+This is my images gallery for a website in pure javascript, without using third-party plugins.
 
 ## How to use:
 
-***1. Connect the decolation.js before closing the tag <body>***
+***1. Place the block for images gallery in the place you need
 ```
-<script type="text/javascript" src="system/js/decolation.js"></script>
+<div id='gall_cont'></div>
+```
+
+***2. Connect the galgam.js before closing the tag <body>***
+```
+<script src="galgam.js"></script>
 </body>
 ```
 
-***2. The script works with data selected from the database. We specify them before connecting the script***
+***3. The script works with data selected from the database. We specify them before connecting the script***
 
 ```
 <script>
 // all data select from db (msql or other)
-imgs = ["82.jpg", "82b.jpg", "84.jpg", "87b.jpg"];
-links = ["Cyberpunk2077", "NierAutomata", "EldenRing", "HorizonFW"];
-titlet = ["Cyberpunk 2077", "Nier: Automata", "Elden Ring", "Horizon Forbidden West"];
-descr = ["Приключенческая ролевая игра с открытым миром, рассказывающая о киберпанке-наёмнике Ви и борьбе за жизнь в мегаполисе Найт-Сити.", "Nier: Automata (NieR new project) — это непрямой сиквел NIER, действие которого разворачивается на порабощенной боевыми роботами Земле.", "НОВЫЙ ФЭНТЕЗИЙНЫЙ РОЛЕВОЙ БОЕВИК. Восстань, погасшая душа! Междуземье ждёт своего повелителя. Пусть благодать приведёт тебя к Кольцу Элден.", "Отправьтесь вместе с Элой в путешествие по величественному, но опасному миру Запретного запада, который скрывает новые загадочные угрозы."];
+galpics = ["nir1.jpg", "nir2.jpg", "nir3.jpg", "nir4.jpg", "nir5.jpg", "nir6.jpg", "nir7.jpg", "nir8.jpg", "nir9.jpg"];
 </script>
 ```
-***3. The general style of the arrows is set by class="_arr", the direction is indicated by id="_pl" - left arrow and id="_pr" - right arrow***
 
-***4. The lower controllers are set as follows:***
+***4. The general style of the arrows is set by class="arr", the direction is indicated by id="_lefs" - left arrow and id="_rifs" - right arrow***
+
+You can set the number of images displayed on the screen. All other images will be hidden.
 ```
-<div class='_shiv _flx'>
-	<div id='sl0' class='_shblo _acti'></div>
-	<div id='sl1' class='_shblo'></div>
-	<div id='sl2' class='_shblo'></div>
-	<div id='sl3' class='_shblo'></div>
-	<div id='sl4' class='_shblo'></div>
-</div>
+gg_cols = 4;
 ```
-The number of blocks is unlimited, but must be 1 more than in the ***imgs[]*** array. The ***_acti*** class points to the initially active controller.
+You can set image folder for gallery images
+```
+qq_urlt = 'imgs/';
+```
 
 ***5. For a better idea of how controllers, arrows, and other elements can be positioned, see example***
 
