@@ -52,10 +52,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		tmp_mass = gg_mass.length;//кол-во изображений по факту
 		if(tmp_mass>gg_cols){
 			tmp_metka = tmp_mass; 
-			for(i=1; i<=(gg_cols); i++){ //вывод видимых изобрадений на страницу
+			for(i=1; i<=(gg_cols); i++){ //вывод видимых изображений на страницу
 				ggall.insertAdjacentHTML("beforeend","<div class='"+gimgs+"'><img data-img='"+i+"' src='"+qq_urlt+gg_mass[i-1]+"'></div>"); 
 			}
-			for(j=gg_cols; j<(tmp_mass); j++){//вывод невидимых изобрадений на страницу
+			for(j=gg_cols; j<(tmp_mass); j++){//вывод невидимых изображений на страницу
 				ggall.insertAdjacentHTML("beforeend","<div class='"+gimgs+" nnact'><img data-img='"+(j+1)+"' src='"+qq_urlt+gg_mass[j]+"'></div>"); 
 			}
 			if(tmp_metka > gg_cols){
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		pict = e.target;
 		pict.style.transform = 'Scale(1.2)';
 	}
-	function _leapicchange(e){// действия при наведении на каждое из изображений
+	function _leapicchange(e){// действия при отсутствии  наведения на из изображении
 		pict = e.target;
 		pict.style.transform = null;
 	}
