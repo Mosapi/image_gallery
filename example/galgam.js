@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		gbip.setAttribute('prop', pfg);
 		//цикл подложки
 		for(k=1; k<=(tmp_mass); k++){
-			gcontp.insertAdjacentHTML("beforeend","<div class='"+gimgt+"'><img data-img='"+k+"' src='"+qq_urlt+gg_mass[k-1]+"'></div>"); 
+			gcontp.insertAdjacentHTML("beforeend","<div tabindex='"+k+"' class='"+gimgt+"'><img data-img='"+k+"' src='"+qq_urlt+gg_mass[k-1]+"'></div>"); 
 		if(pfg == k){
 			var e = pfg;
 			_chanramp(e)
@@ -158,6 +158,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		g_stmch.innerHTML = glt + ' / ' + tmp_mass;
 		tg_act = gcontp.querySelector("img[data-img='"+glt+"']");
 		tg_act.classList.add(img_act);
+		tg_act.parentElement.focus();
 	}
 	function _galclosed(e){
 		gpifo.style.display = null;

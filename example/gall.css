@@ -17,7 +17,7 @@
 .gal_bl{height:130px;width:233px;background-color:#454545;margin:3px;border-radius:6px;cursor:pointer;font-weight:600;color:#fff;text-shadow:0 0 2px #000;}
 .gal_bic{height:60px;margin:3px;}
 .gal_bic img{height:100%;border-radius:6px;}
-._activ{border:3px solid #d55e5e;border-radius:9px;}
+._activ{border-radius:9px;box-shadow:0 0 0px 3px #d55e5e;}
 .arr{background-image: url('sys/arrows.png');width:23px;height:36px;opacity:0.3;position:absolute;}
 .arr:hover{opacity:1;}
 ._lefs{margin:200px 30px;background-position-x:23px;}
